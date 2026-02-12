@@ -161,7 +161,6 @@
             position: relative;
             width: 100%;
             height: 420px;
-            cursor: pointer;
             transform-style: preserve-3d;
             transition: transform 0.6s cubic-bezier(0.4, 0.0, 0.2, 1);
         }
@@ -245,28 +244,46 @@
             border: 1px solid var(--border);
         }
 
-        .tap-hint {
+        /* ─── Flip Button (NEW) ─────────────────────────────────────────── */
+        .flip-btn {
             position: absolute;
             bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
+            padding: 12px 28px;
+            background: linear-gradient(135deg, var(--primary) 0%, #6fa8ff 100%);
+            border: none;
+            border-radius: 100px;
+            font-family: 'Battambang', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            color: #fff;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(79,142,247,0.4);
+            transition: all 0.2s;
             display: flex;
             align-items: center;
             gap: 8px;
-            font-family: 'Battambang', sans-serif;
-            font-size: 12px;
-            color: var(--muted);
-            opacity: 0.7;
+            z-index: 10;
         }
 
-        .tap-icon {
-            font-size: 20px;
-            animation: tap 1.5s infinite;
+        .flip-btn:hover {
+            box-shadow: 0 8px 24px rgba(79,142,247,0.5);
+            transform: translateX(-50%) scale(1.05);
         }
 
-        @keyframes tap {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.2); }
+        .flip-btn:active {
+            transform: translateX(-50%) scale(0.95);
+        }
+
+        .flip-icon {
+            font-size: 18px;
+            animation: flip-hint 2s infinite;
+        }
+
+        @keyframes flip-hint {
+            0%, 100% { transform: rotateY(0deg); }
+            50% { transform: rotateY(180deg); }
         }
 
         /* ─── Audio Controls ────────────────────────────────────────────── */
@@ -491,7 +508,7 @@
 
     <!-- ── Brand Header ─────────────────────────────────────────────── -->
     <div class="brand-header">
-        <div class="brand-badge">📚 Flash Cards</div>
+        <div class="brand-badge">📚 FLASH CARDS</div>
         <div class="brand-title">QC<span>LEARN</span></div>
         <div class="brand-sub">រៀនពាក្យ QC ជាមួយ Flash Cards</div>
     </div>
@@ -531,25 +548,25 @@
 
         <!-- Flash Card -->
         <div class="flashcard-container">
-            <div class="flashcard" id="flashcard" onclick="flipCard()">
+            <div class="flashcard" id="flashcard">
                 <!-- Front -->
                 <div class="card-face card-front">
                     <div class="card-label">中文</div>
                     <div class="chinese-display" id="chineseText">起泡</div>
-                    <div class="tap-hint">
-                        <span class="tap-icon">👆</span>
-                        <span>ចុចដើម្បីមើលការបកប្រែ</span>
-                    </div>
+                    <button class="flip-btn" onclick="flipCard()">
+                        <span class="flip-icon">🔄</span>
+                        <span>មើលការបកប្រែ</span>
+                    </button>
                 </div>
                 <!-- Back -->
                 <div class="card-face card-back">
                     <div class="card-label">ភាសាខ្មែរ</div>
                     <div class="khmer-display" id="khmerText">ពង / ចូលខ្យល់</div>
                     <img class="image-display" id="cardImage" src="" alt="" style="display:none;">
-                    <div class="tap-hint">
-                        <span class="tap-icon">👆</span>
-                        <span>ចុចដើម្បីត្រឡប់ក្រោយ</span>
-                    </div>
+                    <button class="flip-btn" onclick="flipCard()">
+                        <span class="flip-icon">🔄</span>
+                        <span>ត្រឡប់ក្រោយ</span>
+                    </button>
                 </div>
             </div>
         </div>
